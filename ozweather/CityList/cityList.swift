@@ -44,7 +44,7 @@ class cityList: UITableViewController, SearchChildDelegate {
         switchViewControllersSearch(Name: "SearchView", thisData: filteredData);
     }
     @objc func doneTapped() {
-        print("Done");
+        print("Done " + localCityList.count.description);
         //citiesSelected = localCityList;
         delegate?.cityListReturn(localCityList);
     }

@@ -4,7 +4,7 @@ import UIKit
 
 class MainViewController: UIViewController, cityListDelegate {
     func cityListReturn(_ data:[cityInfo]){
-        citiesSelected = data;
+        citiesSelected = data.filter{$0.id != ""};
         getData();
         storeFavorite()
     }
@@ -13,7 +13,13 @@ class MainViewController: UIViewController, cityListDelegate {
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var favBtn: UIButton!
+
+    @IBAction func refreshClk(_ sender: UIButton) {
+        getData();
+    }
+    @IBAction func infoBtnClk(_ sender: UIButton) {
+        switchViewControllerAbout(Name: "AboutViewController");
+    }
     @IBAction func settingBtnClk(_ sender: UIButton) {
         switchViewControllersCity(Name: "cityList");
     }
@@ -43,6 +49,11 @@ class MainViewController: UIViewController, cityListDelegate {
         }
         }
     }
+    func switchViewControllerAbout(Name: String) {
+        let storyboard = UIStoryboard.init(name: Name, bundle: nil)
+        let nav = storyboard.instantiateViewController(withIdentifier: Name)
+        navigationController?.pushViewController(nav, animated: true)
+    }
     
     func switchViewControllersCity(Name: String) {
         let storyboard = UIStoryboard.init(name: Name, bundle: nil)
@@ -54,7 +65,7 @@ class MainViewController: UIViewController, cityListDelegate {
 
     // MARK: - pre display
     func getData() {
-
+        self.spinner.startAnimating();
         WtArray = []; // clear up mem in case
         fcArrayCities = [];
 

@@ -7,8 +7,8 @@ extension forecast: UITableViewDataSource, UITableViewDelegate {
         let date = NSDate(timeIntervalSince1970: dt)
         
         let dayTimePeriodFormatter = DateFormatter()
-        dayTimePeriodFormatter.dateFormat = "dd mm"
-        
+        //dayTimePeriodFormatter.dateFormat = "EEEE dd-MM-yy"
+        dayTimePeriodFormatter.dateFormat = "EEEE"
         let dateString = dayTimePeriodFormatter.string(from: date as Date)
         
         print( " _ts value is \(dt)")
